@@ -25,7 +25,7 @@ fn test_read_file_and_write_file() {
     assert!(cfg.exists("application"));
 
     // Write back to a different file
-    let out = tempfile::NamedTempFile::new().unwrap();
+    let out = common::TempFile::new().unwrap();
     cfg.write_file(out.path().to_str().unwrap())
         .expect("write_file should succeed");
 
@@ -91,7 +91,7 @@ fn test_write_file_preserves_structure() {
     let mut cfg = Config::new();
     cfg.read_string(sample_config_str()).unwrap();
 
-    let out = tempfile::NamedTempFile::new().unwrap();
+    let out = common::TempFile::new().unwrap();
     cfg.write_file(out.path().to_str().unwrap()).unwrap();
 
     let content = std::fs::read_to_string(out.path()).unwrap();

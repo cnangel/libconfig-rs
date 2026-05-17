@@ -50,7 +50,7 @@ fn test_format_affects_output() {
     cfg.read_string("value = 255;").unwrap();
     cfg.set_default_format(SettingFormat::Hex);
 
-    let out = tempfile::NamedTempFile::new().unwrap();
+    let out = common::TempFile::new().unwrap();
     cfg.write_file(out.path().to_str().unwrap()).unwrap();
     let content = std::fs::read_to_string(out.path()).unwrap();
     // Should contain hex representation

@@ -98,17 +98,9 @@ jobs:
           directory = "vendor"
           EOF
           cargo vendor
-          # dpkg-source excludes *.orig files; strip their entries
-          # from .cargo-checksum.json so cargo skips verification
-          find vendor -name '.cargo-checksum.json' -exec python3 -c '
-import json, sys
-for f in sys.argv[1:]:
-    with open(f) as fh:
-        data = json.load(fh)
-    data["files"] = {k: v for k, v in data["files"].items() if not k.endswith(".orig")}
-    with open(f, "w") as fh:
-        json.dump(data, fh)
-' {} +
+          find vendor -name '*.orig' -delete
+          find vendor -name '.cargo-checksum.json' -exec python3 -c "import json,sys;f=sys.argv[1];d=json.load(open(f));d['files']={k:v for k,v in d['files'].items() if not k.endswith('.orig')};json.dump(d,open(f,'w'))" {} \;
+          echo "Vendored $(ls vendor/ | wc -l) crates"
 
       - if: matrix.distro != 'focal' && steps.deb_cache_restore.outputs.cache-hit != 'true'
         name: Build DEB Package

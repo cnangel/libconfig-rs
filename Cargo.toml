@@ -1,0 +1,21 @@
+[package]
+name = "libconfig"
+version = "0.1.0"
+edition = "2021"
+authors = ["Cnangel <cnangel@gmail.com>"]
+description = "Safe Rust bindings for the libconfig C configuration library"
+license = "BSD"
+repository = "https://github.com/cnangel/libconfig-rs"
+keywords = ["libconfig", "config", "configuration", "ffi"]
+categories = ["config", "api-bindings", "development-tools::ffi"]
+readme = "README.md"
+
+[build-dependencies]
+pkg-config = "0.3"
+cc = "1"
+
+[dependencies]
+bitflags = "2"
+
+[dev-dependencies]
+tempfile = "3"

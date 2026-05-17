@@ -1,0 +1,19 @@
+Source: rust-libconfig
+Section: libs
+Priority: optional
+Maintainer: Cnangel <cnangel@gmail.com>
+Build-Depends: debhelper (>= 10),
+               cargo,
+               rustc (>= 1.70),
+               libconfig-dev,
+               pkg-config
+Standards-Version: 4.6.0
+Homepage: https://github.com/cnangel/libconfig-rs
+
+Package: librust-libconfig-dev
+Architecture: any
+Depends: ${misc:Depends}, libconfig-dev
+Description: Safe Rust bindings for libconfig C library
+ Provides a safe Rust wrapper around the libconfig C configuration
+ library with full type safety, lifetime management, and all
+ libconfig 1.1.x through 1.8.x features.

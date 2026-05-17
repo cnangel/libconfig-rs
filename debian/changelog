@@ -1,0 +1,7 @@
+libconfig-rs (0.1.0-1) unstable; urgency=medium
+
+  * Initial release of libconfig-rs
+  * Full libconfig 1.1.x ~ 1.8.x API coverage
+  * Safe Rust wrapper with lifetime management
+
+ -- Cnangel <cnangel@gmail.com>  Sat, 16 May 2026 16:00:00 +0800

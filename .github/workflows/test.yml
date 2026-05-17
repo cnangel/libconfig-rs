@@ -1,0 +1,27 @@
+---
+name: Rust Build & Test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libconfig-dev pkg-config
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Test
+        run: cargo test --release

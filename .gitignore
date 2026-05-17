@@ -1,4 +1,7 @@
 *.bak
 *.log
 *.lock
+*.patch
+*.tar.gz
 target
+vendor

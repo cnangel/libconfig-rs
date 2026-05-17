@@ -32,9 +32,9 @@ compat-test-1.3:
 	PKG_CONFIG_PATH=/tmp/libconfig-install/1.3.2/lib/pkgconfig $(CARGO) build
 
 compat-test-1.4:
-	PKG_CONFIG_PATH=/tmp/libconfig-install/1.4.8/lib/pkgconfig $(CARGO) test
+	LD_LIBRARY_PATH=/tmp/libconfig-install/1.4.8/lib PKG_CONFIG_PATH=/tmp/libconfig-install/1.4.8/lib/pkgconfig $(CARGO) test
 
 compat-test-1.5:
-	PKG_CONFIG_PATH=/tmp/libconfig-install/1.5/lib/pkgconfig $(CARGO) test
+	LD_LIBRARY_PATH=/tmp/libconfig-install/1.5/lib PKG_CONFIG_PATH=/tmp/libconfig-install/1.5/lib/pkgconfig $(CARGO) test
 
 compat-test: compat-test-1.3 compat-test-1.4 compat-test-1.5

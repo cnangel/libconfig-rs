@@ -59,6 +59,7 @@ fn test_add_child() {
     assert!(window.exists("title"));
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_add_and_remove() {
     let mut cfg = libconfig::Config::new();

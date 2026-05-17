@@ -49,6 +49,7 @@ fn test_array_element_types() {
     assert_eq!(features.get_string_elem(2), Some("export"));
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_remove_elem() {
     let mut cfg = libconfig::Config::new();

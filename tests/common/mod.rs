@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use std::io::Write;
 use tempfile::NamedTempFile;
 
@@ -21,11 +23,9 @@ application:
 "#
 }
 
-/// Create a Config and read the sample config string into it.
+/// Create a Config and read the sample config string via temp file (works on all versions).
 pub fn new_config_with_data() -> libconfig::Config {
-    let mut cfg = libconfig::Config::new();
-    cfg.read_string(sample_config_str())
-        .expect("sample config string should parse");
+    let (cfg, _file) = temp_config_file(sample_config_str());
     cfg
 }
 

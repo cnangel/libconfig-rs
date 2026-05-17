@@ -9,6 +9,7 @@ fn test_new_and_default() {
     let _cfg2 = Config::default();
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_read_string_sample() {
     let mut cfg = Config::new();
@@ -50,6 +51,7 @@ fn test_read_file_not_found() {
     assert!(!err.message.is_empty());
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_read_string_invalid() {
     let mut cfg = Config::new();
@@ -57,6 +59,7 @@ fn test_read_string_invalid() {
     assert!(result.is_err());
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_error_state() {
     let mut cfg = Config::new();
@@ -82,6 +85,7 @@ fn test_clear_reuse() {
     assert_eq!(cfg.lookup_string("name"), Some("test"));
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_write_file_preserves_structure() {
     let mut cfg = Config::new();

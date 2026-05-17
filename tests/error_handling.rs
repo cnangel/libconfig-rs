@@ -1,5 +1,6 @@
 use libconfig::Config;
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_parse_error() {
     let mut cfg = Config::new();
@@ -18,6 +19,7 @@ fn test_file_not_found_error() {
     assert!(!err.message.is_empty());
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_error_display() {
     let mut cfg = Config::new();
@@ -36,6 +38,7 @@ fn test_error_line() {
     let _line = cfg.error_line();
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_error_type() {
     let mut cfg = Config::new();
@@ -59,6 +62,7 @@ fn test_error_file() {
     let _file = cfg.error_file();
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_config_error_implements_error_trait() {
     let mut cfg = Config::new();

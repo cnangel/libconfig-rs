@@ -31,6 +31,7 @@ fn test_get_string() {
     assert_eq!(title.get_string(), "MyApp");
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_set_int() {
     let mut cfg = libconfig::Config::new();
@@ -44,6 +45,7 @@ fn test_set_int() {
     assert_eq!(cfg.lookup_int("value"), Some(100));
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_set_float() {
     let mut cfg = libconfig::Config::new();
@@ -58,6 +60,7 @@ fn test_set_float() {
     assert!((val - 3.14).abs() < 0.001);
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_set_bool() {
     let mut cfg = libconfig::Config::new();
@@ -71,6 +74,7 @@ fn test_set_bool() {
     assert_eq!(cfg.lookup_bool("value"), Some(true));
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_set_string() {
     let mut cfg = libconfig::Config::new();
@@ -84,6 +88,7 @@ fn test_set_string() {
     assert_eq!(cfg.lookup_string("value"), Some("new"));
 }
 
+#[cfg(libconfig_1_4)]
 #[test]
 fn test_set_int64() {
     let mut cfg = libconfig::Config::new();

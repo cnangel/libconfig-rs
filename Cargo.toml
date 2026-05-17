@@ -10,6 +10,9 @@ keywords = ["libconfig", "config", "configuration", "ffi"]
 categories = ["config", "api-bindings", "development-tools::ffi"]
 readme = "README.md"
 
+[lib]
+crate-type = ["lib", "cdylib"]
+
 [build-dependencies]
 pkg-config = "0.3"
 cc = "1"
@@ -19,3 +22,7 @@ bitflags = "2"
 
 [dev-dependencies]
 tempfile = "3"
+
+[profile.release]
+debug = true
+strip = "none"

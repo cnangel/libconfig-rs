@@ -1,4 +1,4 @@
-Source: rust-libconfig
+Source: libconfig-rs
 Section: libs
 Priority: optional
 Maintainer: Cnangel <cnangel@gmail.com>

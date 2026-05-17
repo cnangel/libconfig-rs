@@ -89,6 +89,7 @@ unsigned short wrapper_config_get_tab_width(const config_t *config) {
 #if (LIBCONFIG_VER_MAJOR > 1) || (LIBCONFIG_VER_MAJOR == 1 && LIBCONFIG_VER_MINOR >= 8)
     return config_get_tab_width(config);
 #else
+    (void)config;
     return 2;
 #endif
 }
@@ -99,6 +100,7 @@ unsigned short wrapper_config_get_float_precision(const config_t *config) {
 #if (LIBCONFIG_VER_MAJOR > 1) || (LIBCONFIG_VER_MAJOR == 1 && LIBCONFIG_VER_MINOR >= 8)
     return config_get_float_precision(config);
 #else
+    (void)config;
     return 6;
 #endif
 }

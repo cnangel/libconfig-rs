@@ -2,14 +2,15 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    // Register custom cfg flags for Rust 1.80+ check-cfg
-    println!("cargo::rustc-check-cfg=cfg(libconfig_1_1)");
-    println!("cargo::rustc-check-cfg=cfg(libconfig_1_4)");
-    println!("cargo::rustc-check-cfg=cfg(libconfig_1_5)");
-    println!("cargo::rustc-check-cfg=cfg(libconfig_1_8)");
-    println!("cargo::rustc-check-cfg=cfg(libconfig_ver_major, values(\"1\"))");
-    println!("cargo::rustc-check-cfg=cfg(libconfig_ver_minor, values(any()))");
-    println!("cargo::rustc-check-cfg=cfg(libconfig_ver, values(any()))");
+    // Register custom cfg flags for Rust 1.80+ check-cfg; fall back to single-colon
+    // syntax for compatibility with older Rust versions (el8/el9).
+    println!("cargo:rustc-check-cfg=cfg(libconfig_1_1)");
+    println!("cargo:rustc-check-cfg=cfg(libconfig_1_4)");
+    println!("cargo:rustc-check-cfg=cfg(libconfig_1_5)");
+    println!("cargo:rustc-check-cfg=cfg(libconfig_1_8)");
+    println!("cargo:rustc-check-cfg=cfg(libconfig_ver_major, values(\"1\"))");
+    println!("cargo:rustc-check-cfg=cfg(libconfig_ver_minor, values(any()))");
+    println!("cargo:rustc-check-cfg=cfg(libconfig_ver, values(any()))");
 
     let lib = match pkg_config::Config::new()
         .atleast_version("1.1")

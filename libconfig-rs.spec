@@ -6,6 +6,10 @@ License:        BSD
 URL:            https://github.com/cnangel/libconfig-rs
 Source0:        %{name}-%{version}.tar.gz
 
+# find-debuginfo.sh cannot parse Rust DWARF to locate .rs sources.
+# Disable only the debugsource sub-package; debuginfo from the .so is kept.
+%global _debugsource_packages 0
+
 BuildRequires:  cargo
 BuildRequires:  rust
 BuildRequires:  libconfig-devel
@@ -23,15 +27,21 @@ features including configuration options, formatting, and safe getters.
 cargo build --release
 
 %install
-# This is a Rust library crate — no binaries to install
-# RPM packaging for -devel crate only
+# Install shared library for linking and debuginfo extraction
+# cargo names cdylib as lib<crate>.so; rename to libconfig_rs to avoid
+# confusion with the system libconfig.so
+install -d -m 755 %{buildroot}%{_libdir}
+install -m 755 target/release/liblibconfig.so %{buildroot}%{_libdir}/libconfig_rs.so
+
+# Install source to cargo registry
 install -d -m 755 %{buildroot}%{_datadir}/cargo/registry/%{name}-%{version}
-cp -r . %{buildroot}%{_datadir}/cargo/registry/%{name}-%{version}/
+tar --exclude=target -cf - . | tar -xf - -C %{buildroot}%{_datadir}/cargo/registry/%{name}-%{version}/
 
 %files
 %doc README.md
+%{_libdir}/libconfig_rs.so
 %{_datadir}/cargo/registry/%{name}-%{version}
 
 %changelog
-* Sat May 16 2026 Cnangel <cnangel@gmail.com> 0.1.0-1
+* Sun May 17 2026 Cnangel <cnangel@gmail.com> 0.1.0-1
 - Initial Rust binding for libconfig with full API surface

@@ -5,3 +5,9 @@
 *.tar.gz
 target
 vendor
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/*.substvars
+debian/librust-libconfig-dev/
+debian/tmp/

@@ -103,7 +103,7 @@ jobs:
           echo "Vendored $(ls vendor/ | wc -l) crates"
 
       - if: matrix.distro != 'focal' && steps.deb_cache_restore.outputs.cache-hit != 'true'
-        name: Build DEB Package
+        name: Build DEB Package ${{ matrix.distro }}
         id: deb_build
         uses: cnangel/build-deb-action@master
         with:
@@ -122,7 +122,7 @@ jobs:
           for f in ${{ env.deb_path }}/${{ matrix.distro }}/*.deb; do mv "$f" "${{ env.deb_path }}/${{ matrix.distro }}/${{ matrix.distro }}-$(basename "$f")"; done
 
       - if: matrix.distro == 'focal' && steps.deb_cache_restore.outputs.cache-hit != 'true'
-        name: Build DEB Package Focal via pbuilder
+        name: Build DEB Package ${{ matrix.distro }} via pbuilder
         run: |
           sudo apt-get update
           sudo apt-get install -y pbuilder ubuntu-dev-tools devscripts
@@ -133,6 +133,9 @@ jobs:
             sudo cp /var/cache/pbuilder/focal-base.tgz /var/cache/pbuilder/
           fi
           pbuilder-dist focal create --mirror http://archive.ubuntu.com/ubuntu || true
+          # Remove Cargo.lock v4 (too new for focal's Rust); pbuilder's cargo
+          # will regenerate a v3 lock file from the vendored sources.
+          rm -f Cargo.lock
           (cd .. && dpkg-source -b ${{ env.package_name }})
           mkdir -p ./pbuilder-result
           pbuilder-dist focal build --buildresult ./pbuilder-result ../*.dsc
